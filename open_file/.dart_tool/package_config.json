@@ -261,7 +261,7 @@
     },
     {
       "name": "open_file_ios",
-      "rootUri": "file:///Users/tientrinh/.pub-cache/hosted/pub.dev/open_file_ios-1.0.3",
+      "rootUri": "../../open_file_ios",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },

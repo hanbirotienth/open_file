@@ -178,10 +178,9 @@ packages:
   open_file_ios:
     dependency: transitive
     description:
-      name: open_file_ios
-      sha256: "02996f01e5f6863832068e97f8f3a5ef9b613516db6897f373b43b79849e4d07"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../open_file_ios"
+      relative: true
+    source: path
     version: "1.0.3"
   open_file_linux:
     dependency: transitive

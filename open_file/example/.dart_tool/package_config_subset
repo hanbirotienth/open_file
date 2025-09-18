@@ -74,10 +74,6 @@ open_file_android
 2.17
 file:///Users/tientrinh/.pub-cache/hosted/pub.dev/open_file_android-1.0.6/
 file:///Users/tientrinh/.pub-cache/hosted/pub.dev/open_file_android-1.0.6/lib/
-open_file_ios
-2.17
-file:///Users/tientrinh/.pub-cache/hosted/pub.dev/open_file_ios-1.0.3/
-file:///Users/tientrinh/.pub-cache/hosted/pub.dev/open_file_ios-1.0.3/lib/
 open_file_linux
 2.17
 file:///Users/tientrinh/.pub-cache/hosted/pub.dev/open_file_linux-0.0.5/
@@ -194,4 +190,8 @@ example
 3.5
 file:///Users/tientrinh/Documents/Hanbiro_Project/open_file/open_file/example/
 file:///Users/tientrinh/Documents/Hanbiro_Project/open_file/open_file/example/lib/
+open_file_ios
+2.17
+file:///Users/tientrinh/Documents/Hanbiro_Project/open_file/open_file_ios/
+file:///Users/tientrinh/Documents/Hanbiro_Project/open_file/open_file_ios/lib/
 2
