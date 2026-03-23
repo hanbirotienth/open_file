@@ -45,6 +45,16 @@ static NSString *const CHANNEL_NAME = @"open_file";
         BOOL fileExist=[fileManager fileExistsAtPath:filePath];
         if(fileExist){
             NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+            
+            if (@available(iOS 26.0, *)) {
+                fileURL = [self createTempFileFromURL:fileURL];
+                if (!fileURL) {
+                    NSString * json = [self getJson:@"File opened incorrectly。" type:@-5];
+                    result(json);
+                    return;
+                }
+            }
+            
             _documentController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
             _documentController.delegate = self;
             BOOL isAppOpen = [call.arguments[@"isIOSAppOpen"] boolValue];
@@ -188,6 +198,50 @@ static NSString *const CHANNEL_NAME = @"open_file";
         NSLog(@"doc type not supported for preview");
         NSLog(@"%@", exestr);
     }
+}
+
+
+- (NSURL *)createTempFileFromURL:(NSURL *)originalURL {
+    
+    if (!originalURL || !originalURL.isFileURL) {
+        NSLog(@"❌ Invalid URL");
+        return nil;
+    }
+    
+    NSString *originalPath = originalURL.path;
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:originalPath]) {
+        NSLog(@"❌ File not found: %@", originalPath);
+        return nil;
+    }
+    
+    
+    NSString *extension = originalURL.pathExtension;
+    if (extension.length == 0) {
+        extension = @"tmp";
+    }
+    
+    NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
+    NSString *fileName = [NSString stringWithFormat:@"%lld.%@",
+                         (long long)timestamp,
+                         extension];
+    
+    NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+    [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
+    
+    NSError *error = nil;
+    BOOL success = [[NSFileManager defaultManager] copyItemAtPath:originalPath
+                                                          toPath:tempPath
+                                                           error:&error];
+    
+    if (!success || error) {
+        NSLog(@"❌ Copy failed: %@", error);
+        return nil;
+    }
+    
+    NSLog(@"✅ Temp file created: %@", tempPath);
+    
+    return [NSURL fileURLWithPath:tempPath];
 }
 
 @end
