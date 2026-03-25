@@ -222,9 +222,7 @@ static NSString *const CHANNEL_NAME = @"open_file";
     }
     
     NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
-    NSString *fileName = [NSString stringWithFormat:@"%lld.%@",
-                         (long long)timestamp,
-                         extension];
+    NSString *fileName = [NSString stringWithFormat:@"file_preview.%@", extension];
     
     NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
     [[NSFileManager defaultManager] removeItemAtPath:tempPath error:nil];
